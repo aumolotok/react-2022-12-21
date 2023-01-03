@@ -20,7 +20,7 @@ export const Dish = ({dish}) => {
     } 
 
     const drowIngredients = () => {
-        if(count > 0) {
+        if(count > 1) {
             return(
                 <ol>
                     {dish.ingredients.map(ingredient => <li><Ingredient title={ingredient}/></li>)}

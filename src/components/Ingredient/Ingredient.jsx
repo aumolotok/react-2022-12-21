@@ -6,7 +6,9 @@ export const Ingredient = ({title}) => {
     const [ingredientCount, setCount] = useState(1);
 
     const increaseIngredient = () => {
-        setCount(ingredientCount + 1);
+        if(ingredientCount < 5) {
+        setCount(ingredientCount + 1);            
+        }
     }
 
     const decreaseIngredient = () => {
