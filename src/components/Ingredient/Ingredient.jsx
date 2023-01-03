@@ -7,7 +7,7 @@ export const Ingredient = ({title}) => {
 
     const increaseIngredient = () => {
         if(ingredientCount < 5) {
-        setCount(ingredientCount + 1);            
+            setCount(ingredientCount + 1);            
         }
     }
 
