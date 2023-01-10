@@ -25,8 +25,8 @@ export const Tabs = ({sourceArray, buttonTextProvider, componentBuildGunction}) 
         <div className = "Tabs">
             <div className="tabButtons">
                 {renderButtons()}
-                {renderActiveTab(sourceArray.at(activeTab))}
             </div>
+            {renderActiveTab(sourceArray.at(activeTab))}
         </div>
     )
 }
