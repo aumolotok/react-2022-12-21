@@ -9,7 +9,7 @@ export const RestaurantTabs = ({restaurants}) => {
         <Tabs 
             sourceArray={restaurants} 
             buttonTextProvider={(restaurant) => restaurant.name} 
-            componentBuildGunction={restaurant => <Restaurant restaurant={restaurant}></Restaurant>}
+            tabBuildFunction={restaurant => <Restaurant restaurant={restaurant}></Restaurant>}
         />
     )
 }

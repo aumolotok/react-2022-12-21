@@ -3,7 +3,7 @@ import { Button} from "../Button/Button"
 import { Restaurant } from "../Restaurant/Restaurant"
 import { Tab} from "../Tabs/Tab"
 
-export const Tabs = ({sourceArray, buttonTextProvider, componentBuildGunction}) => {
+export const Tabs = ({sourceArray, buttonTextProvider, tabBuildFunction}) => {
 
     const [activeTab, setActiveTab] = useState(0)
 
@@ -13,7 +13,7 @@ export const Tabs = ({sourceArray, buttonTextProvider, componentBuildGunction}) 
 
     const renderActiveTab  = (restaurant) => {
         return (<Tab>
-            {componentBuildGunction(restaurant)}
+            {tabBuildFunction(restaurant)}
         </Tab>)
     }
 
