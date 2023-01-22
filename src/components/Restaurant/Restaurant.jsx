@@ -5,12 +5,17 @@ import { NewReviewForm } from '../NewReviewForm/NewReviewForm';
 import { Rating } from '../Rating/Rating';
 import { Size } from '../../constants/ui';
 import { useSelector } from 'react-redux';
-import { selectRestaurantById } from '../../store/modules/restaurant/selectors';
+import { selectRestaurantById, selectRestaurantIds } from '../../store/modules/restaurant/selectors';
+import { selectReviewsByIds } from '../../store/modules/reviews/selectors';
 
 export const Restaurant = ({ restaurantId }) => {
   const restaurant = useSelector((state) =>
     selectRestaurantById(state, { restaurantId })
   );
+
+  const reviews = useSelector((state) => 
+    selectReviewsByIds(state, restaurant.reviews)
+  )
 
   // const rating = useMemo(
   //   () =>
@@ -29,7 +34,7 @@ export const Restaurant = ({ restaurantId }) => {
       <h1>{restaurant.name}</h1>
       {/*<Rating value={rating} size={Size.l} />*/}
       <Menu restaurantId={restaurantId} />
-      {/*<Reviews reviews={reviews} />*/}
+      <Reviews reviews={reviews}/>
     </div>
   );
 };
