@@ -1,0 +1,1 @@
+export const selectUsersModule = (state) => state.user
