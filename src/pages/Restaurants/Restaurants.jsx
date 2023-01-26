@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRestaurantLoading } from '../../store/modules/restaurant/selectors';
 import { loadUsers } from '../../store/modules/user/actions';
-import { fetchRestaurants } from '../../store/modules/restaurant';
+import { fetchRestaurants } from '../../store/modules/restaurant/thunk/fetchRestaurants';
 
 export const RestaurantsPage = () => {
   const dispatch = useDispatch();

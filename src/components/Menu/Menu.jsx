@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurantMenuById } from '../../store/modules/restaurant/selectors';
 import { useEffect } from 'react';
 import { selectIsDishLoading } from '../../store/modules/dish/selectors';
-import { fetchDishByRestaurantId } from '../../store/modules/dish';
+import { fetchDishByRestaurantId } from '../../store/modules/dish/thunks/fetchDishByRestaurantId';
 
 export const Menu = ({ restaurantId }) => {
   const dispatch = useDispatch();
