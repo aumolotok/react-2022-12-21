@@ -1,34 +1,34 @@
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { LOADING_STATUSES } from '../../constants/loadingStatuses';
-import { DISH_ACTIONS } from './actions';
 
-const defaultState = {
+const initialState = {
   entities: {},
   ids: [],
-  loadingStatus: LOADING_STATUSES.idle
+  loadingStatus: LOADING_STATUSES.idle,
 };
 
-export const dishReducer = (state = defaultState, action) => {
-  switch (action?.type) {
-    case DISH_ACTIONS.startLoading:
-      return {
-        ...state,
-        loadingStatus: LOADING_STATUSES.loading,
+export const dishSlice = createSlice({
+  name: 'dish',
+  initialState,
+  reducers: {
+    startLoading: (state) => {
+      state.loadingStatus = LOADING_STATUSES.loading;
+    },
+    finishLoading: (state, { payload: { entities, ids } }) => {
+      state.entities = {
+        ...state.entities,
+        ...entities,
       };
-    case DISH_ACTIONS.finishLoading:
-      return {
-        loadingStatus: LOADING_STATUSES.success,
-        entities: {
-          ...state.entities,
-          ...action.payload.entities,
-        },
-        ids: Array.from(new Set([...state.ids, ...action.payload.ids])),
-      };
-    case DISH_ACTIONS.failLoading:
-      return {
-        ...state,
-        loadingStatus: LOADING_STATUSES.failed,
-      };
-    default:
-      return state;
-  }
+      state.ids = Array.from(new Set([...state.ids, ...ids]));
+      state.loadingStatus = LOADING_STATUSES.success;
+    },
+    failLoading: (state) => {
+      state.loadingStatus = LOADING_STATUSES.failed;
+    },
+  },
+});
+
+export const dishActions = {
+  ...dishSlice.actions,
+  load: createAction(`${dishSlice.name}/load`),
 };

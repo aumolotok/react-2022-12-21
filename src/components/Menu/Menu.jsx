@@ -2,8 +2,8 @@ import { Dish } from '../Dish/Dish';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurantMenuById } from '../../store/modules/restaurant/selectors';
 import { useEffect } from 'react';
-import { loadDishes } from '../../store/modules/dish/actions';
 import { selectIsDishLoading } from '../../store/modules/dish/selectors';
+import { dishActions } from '../../store/modules/dish';
 
 export const Menu = ({ restaurantId }) => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const Menu = ({ restaurantId }) => {
   const isLoading = useSelector(selectIsDishLoading);
 
   useEffect(() => {
-    dispatch(loadDishes(restaurantId));
+    dispatch(dishActions.load(restaurantId));
   }, [restaurantId]);
 
   if (isLoading) {

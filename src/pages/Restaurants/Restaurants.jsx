@@ -3,9 +3,9 @@ import { Cart } from '../../components/Cart/Cart';
 import { Restaurant } from '../../components/Restaurant/Restaurant';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadRestaurants } from '../../store/modules/restaurant/actions';
 import { selectIsRestaurantLoading } from '../../store/modules/restaurant/selectors';
 import { loadUsers } from '../../store/modules/user/actions';
+import { restaurantActions } from '../../store/modules/restaurant';
 
 export const RestaurantsPage = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ export const RestaurantsPage = () => {
   const isLoading = useSelector(selectIsRestaurantLoading);
 
   useEffect(() => {
-    dispatch(loadRestaurants());
+    dispatch(restaurantActions.load());
     dispatch(loadUsers());
   }, []);
 

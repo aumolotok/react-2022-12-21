@@ -1,16 +1,11 @@
+import { dishActions } from '..';
 import { normalizer } from '../../../utils/normalizer';
 import { selectRestaurantMenuById } from '../../restaurant/selectors';
-import {
-  DISH_ACTIONS,
-  failLoadingDishes,
-  finishLoadingDishes,
-  startLoadingDishes,
-} from '../actions';
 import { selectDishIds } from '../selectors';
 
 export const loadDishByRestaurantIdIfNotExist =
   (store) => (next) => (action) => {
-    if (action?.type !== DISH_ACTIONS.load) {
+    if (action?.type !== dishActions.load.type) {
       return next(action);
     }
 
@@ -27,11 +22,11 @@ export const loadDishByRestaurantIdIfNotExist =
       return;
     }
 
-    store.dispatch(startLoadingDishes());
+    store.dispatch(dishActions.startLoading());
     fetch(`http://localhost:3001/api/products?restaurantId=${restaurantId}`)
       .then((response) => response.json())
       .then((dishes) => {
-        store.dispatch(finishLoadingDishes(normalizer(dishes)));
+        store.dispatch(dishActions.finishLoading(normalizer(dishes)));
       })
-      .catch(() => store.dispatch(failLoadingDishes));
+      .catch(() => store.dispatch(dishActions.failLoading()));
   };
