@@ -4,7 +4,6 @@ import { restaurantSlice } from './modules/restaurant';
 import { loadUsersIfNotExist } from './modules/user/middleware/loadUsersIfNotExist';
 import { reviewReducer } from './modules/review';
 import { userReducer } from './modules/user';
-import { logger } from './middleware/logger';
 import { loadReviewByRestaurantIdIfNotExist } from './modules/review/middleware/loadReviewsByRestaurantIdIfNotExist';
 import { configureStore } from '@reduxjs/toolkit';
 import { dishSlice } from './modules/dish';
@@ -21,7 +20,6 @@ export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
-      logger,
       loadUsersIfNotExist,
       loadReviewByRestaurantIdIfNotExist,
     ]),
