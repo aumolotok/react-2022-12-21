@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import { cartReducer } from './modules/cart';
 import { restaurantSlice } from './modules/restaurant';
-import { loadRestaurantsIfNotExist } from './modules/restaurant/middleware/loadRestaurantsIfNotExist';
-import { loadDishByRestaurantIdIfNotExist } from './modules/dish/middleware/loadDishByRestaurantIdIfNotExist';
 import { loadUsersIfNotExist } from './modules/user/middleware/loadUsersIfNotExist';
 import { reviewReducer } from './modules/review';
 import { userReducer } from './modules/user';
@@ -21,13 +19,12 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: [
-    logger,
-    loadRestaurantsIfNotExist,
-    loadDishByRestaurantIdIfNotExist,
-    loadUsersIfNotExist,
-    loadReviewByRestaurantIdIfNotExist,
-  ],
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([
+      logger,
+      loadUsersIfNotExist,
+      loadReviewByRestaurantIdIfNotExist,
+    ]),
 });
 
 // export const store = createStore(

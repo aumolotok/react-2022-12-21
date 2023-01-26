@@ -27,5 +27,4 @@ export const restaurantSlice = createSlice({
 
 export const restaurantActions = {
   ...restaurantSlice.actions,
-  load: createAction(`${restaurantSlice.name}/load`),
 };

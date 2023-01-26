@@ -4,13 +4,8 @@ import { selectRestaurantMenuById } from '../../restaurant/selectors';
 import { selectDishIds } from '../selectors';
 
 export const loadDishByRestaurantIdIfNotExist =
-  (store) => (next) => (action) => {
-    if (action?.type !== dishActions.load.type) {
-      return next(action);
-    }
-
-    const restaurantId = action.payload;
-    const state = store.getState();
+  (restaurantId) => (dispatch, getState) => {
+    const state = getState();
     const restaurantDishIds = selectRestaurantMenuById(state, { restaurantId });
     const loadedDishIds = selectDishIds(state);
 
@@ -22,11 +17,11 @@ export const loadDishByRestaurantIdIfNotExist =
       return;
     }
 
-    store.dispatch(dishActions.startLoading());
+    dispatch(dishActions.startLoading());
     fetch(`http://localhost:3001/api/products?restaurantId=${restaurantId}`)
       .then((response) => response.json())
       .then((dishes) => {
-        store.dispatch(dishActions.finishLoading(normalizer(dishes)));
+        dispatch(dishActions.finishLoading(normalizer(dishes)));
       })
-      .catch(() => store.dispatch(dishActions.failLoading()));
+      .catch(() => dispatch(dishActions.failLoading()));
   };

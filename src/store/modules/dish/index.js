@@ -28,7 +28,4 @@ export const dishSlice = createSlice({
   },
 });
 
-export const dishActions = {
-  ...dishSlice.actions,
-  load: createAction(`${dishSlice.name}/load`),
-};
+export const dishActions = dishSlice.actions;
